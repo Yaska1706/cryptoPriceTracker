@@ -1,4 +1,6 @@
 import React from 'react'
+import { ResponseHandler } from '../../Helper'
+import { API_URL } from '../../Config'
 
 class List extends React.Component {
     constructor(){
@@ -12,12 +14,8 @@ class List extends React.Component {
 
     componentDidMount(){ 
         this.setState({loading:false})
-        fetch('https://api.udilia.com/coins/v1/cryptocurrencies?page=1&perPage=20')
-            .then(response => {
-                return response.json().then(json => {
-                    return response.ok ? json : Promise.reject(json);
-                });
-            })
+        fetch(API_URL + '/cryptocurrencies?page=1&perPage=20')
+            .then(ResponseHandler)
             .then((data) => {
                 this.setState({
                     currencies: data.currencies,
