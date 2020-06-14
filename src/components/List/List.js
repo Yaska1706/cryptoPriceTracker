@@ -1,8 +1,8 @@
 import React from 'react'
 import { ResponseHandler } from '../../Helper'
 import { API_URL } from '../../Config'
-import './Table.css'
 import Loading from '../common/Loading'
+import Table from './Table'
 
 class List extends React.Component {
     constructor(){
@@ -46,49 +46,20 @@ class List extends React.Component {
 
     }
     render(){
+        const {loading,error,currencies} = this.state;
       
 
-        if(this.state.loading){
+        if(loading){
             return <div className="loading-container"><Loading/></div>
         }
-        if (this.state.error){
+        if (error){
         return <div className="error">{this.state.error}</div>
         }
         return(
-            
-            <div className="Table-container">
-                <table className="Table">
-                    <thead className="Table-head">
-                        <tr>
-                            <th>cryptocurrencies</th>
-                            <th>Price</th>
-                            <th>Market</th>
-                            <th>24hr change</th>
-                        </tr>
-                    </thead>
-                    <tbody className="Table-body">
-                    {this.state.currencies.map((currency) => (
-                        <tr key = {currency.id }>
-                            <td>
-                    <span className="Table-rank">{currency.rank}</span>
-                        {currency.name}
-                            </td>
-                            <td>
-                    <span className="Table-dollar">$ {currency.price}</span>
-                            </td>
-                            <td>
-                    <span className="Table-dollar">$ {currency.marketCap}</span>
-                            </td>   
-                            <td>
-                                {this.changePercent(currency.percentChange24h)}
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-
-            </div>
-
+            <Table 
+            currencies = {currencies}
+            changePercent = {this.changePercent}
+            />
         );
     }
 }
