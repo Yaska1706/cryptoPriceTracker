@@ -25,6 +25,7 @@ class List extends React.Component {
             .then((data) => {
                 this.setState({
                     currencies: data.currencies,
+                    totalPages: data.totalPages,
                     loading: false
                 })
                 
