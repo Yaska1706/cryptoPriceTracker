@@ -1,7 +1,9 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import './Table.css'
 
 const Table = (props) => {
+    const {currencies,changePercent,history} = props;
     return(
         <div className="Table-container">
                 <table className="Table">
@@ -14,20 +16,23 @@ const Table = (props) => {
                         </tr>
                     </thead>
                     <tbody className="Table-body">
-                    {props.currencies.map((currency) => (
-                        <tr key = {currency.id }>
+                    {currencies.map((currency) => (
+                        <tr 
+                        key = {currency.id }
+                        onClick={() => history.push( `/currency/${currency.id}`)}
+                        >
                             <td>
                     <span className="Table-rank">{currency.rank}</span>
                         {currency.name}
                             </td>
                             <td>
-                    <span className="Table-dollar">$ {currency.price}</span>
+                    <span className="Table-dollar">$ </span>{currency.price}
                             </td>
                             <td>
-                    <span className="Table-dollar">$ {currency.marketCap}</span>
+                    <span className="Table-dollar">$ </span>{currency.marketCap}
                             </td>   
                             <td>
-                                {props.changePercent(currency.percentChange24h)}
+                                {changePercent(currency.percentChange24h)}
                             </td>
                         </tr>
                     ))}
@@ -38,4 +43,4 @@ const Table = (props) => {
     )
 }
 
-export default Table
+export default withRouter(Table)
