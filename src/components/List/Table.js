@@ -1,9 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
+import { changePercent } from '../../Helper'
 import './Table.css'
 
 const Table = (props) => {
-    const {currencies,changePercent,history} = props;
+    const {currencies,history} = props;
     return(
         <div className="Table-container">
                 <table className="Table">
